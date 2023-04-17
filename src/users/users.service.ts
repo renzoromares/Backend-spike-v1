@@ -21,12 +21,12 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  async findOne(options: any): Promise<User> {
-    const user = await this.userRepository.findOne(options);
+  async findOne(userId: string): Promise<User> {
+    const id = userId.toString()
+    const user = await this.userRepository.findOne({ where: { userId: id } });
     if (!user) {
-      throw new NotFoundException(`User #${options} not found`);
+      throw new NotFoundException(`User #${userId} not found`);
     }
-
     return user;
   }
 
