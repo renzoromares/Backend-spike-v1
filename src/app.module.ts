@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -6,8 +6,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
+
+  //!! TOD0 CONFIG - MUSST BE CHANGE TO usefactory
   imports: [
     UsersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -17,16 +20,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       debug: false,
       playground: true,
     }),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      keepConnectionAlive: true,
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'SuperSecret!23',
-      database: 'postgres',
-      autoLoadEntities: true,
-      synchronize: true,
+          type:'postgres',
+          host: process.env.POSTGRES_HOST,
+          port:  parseInt(process.env.POSTGRES_PORT),
+          username: process.env.POSTGRES_USERNAME,
+          password: process.env.POSTGRES_PASSWORD,
+          database: process.env.POSTGRES_DATABASE,
+          entities: [],
+          synchronize: true,
     }),
     UsersModule,
   ],
