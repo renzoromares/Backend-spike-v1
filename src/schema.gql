@@ -2,68 +2,70 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Company {
+  company: String!
+  id: String!
+  status: String!
+}
+
+input CreateCompanyInput {
+  company: String!
+  status: String!
+}
+
 input CreateUserInput {
-  """email of the user"""
+  city: String!
   email: String!
-
-  """Example field (placeholder)"""
-  exampleField: Int!
-
-  """first name of the user"""
   firstName: String!
-
-  """last name of the user"""
   lastName: String!
-
-  """role of the user"""
-  role: String!
+  state: String!
+  status: String!
+  street: String!
+  zip: String!
 }
 
 type Mutation {
+  createCompany(createCompanyInput: CreateCompanyInput!): Company!
   createUser(createUserInput: CreateUserInput!): User!
+  removeCompany(id: Int!): Company!
   removeUser(id: Int!): User!
+  updateCompany(updateCompanyInput: UpdateCompanyInput!): Company!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  user(userId: String): User!
+  companies(status: String!): [Company!]!
+  company(id: Int!): Company!
+  user(id: String): User!
   users: [User!]!
 }
 
+input UpdateCompanyInput {
+  company: String
+  id: String!
+  status: String
+}
+
 input UpdateUserInput {
-  """email of the user"""
+  city: String
   email: String
-
-  """Example field (placeholder)"""
-  exampleField: Int
-
-  """first name of the user"""
   firstName: String
-
-  """last name of the user"""
+  id: String!
   lastName: String
-
-  """role of the user"""
-  role: String
-  userId: String!
+  state: String
+  status: String
+  street: String
+  zip: String
 }
 
 type User {
-  """email of the user"""
+  city: String!
   email: String!
-
-  """Example field (placeholder)"""
-  exampleField: Int!
-
-  """first name of the user"""
   firstName: String!
-
-  """last name of the user"""
+  id: String!
   lastName: String!
-
-  """role of the user"""
-  role: String!
-
-  """id of the user"""
-  userId: String!
+  state: String!
+  status: String!
+  street: String!
+  zip: String!
 }

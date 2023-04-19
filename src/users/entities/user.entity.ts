@@ -5,21 +5,38 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @ObjectType()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  @Field(() => String, { description: 'id of the user' })
-  userId: string;
-  @Column('int')
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String)
+  id: string;
+
   @Column()
-  @Field(() => String, { description: 'first name of the user' })
+  @Field(() => String)
   firstName: string;
+
   @Column()
-  @Field(() => String, { description: 'last name of the user' })
+  @Field(() => String)
   lastName: string;
+
   @Column()
-  @Field(() => String, { description: 'email of the user' })
+  @Field(() => String)
   email: string;
+
   @Column()
-  @Field(() => String, { description: 'role of the user' })
-  role: string;
+  @Field(() => String)
+  street: string;
+  
+  @Column()
+  @Field(() => String)
+  state: string;
+
+  @Column()
+  @Field(() => String)
+  city: string;
+
+  @Column()
+  @Field(() => String)
+  zip: string;
+
+  @Column()
+  @Field(() => String)
+  status: string;
 }

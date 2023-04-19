@@ -17,13 +17,16 @@ export class UsersService {
     return await this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll(){
+    const user = await this.userRepository.find({ where: {
+      status: "Active"
+    }});
+    return user
   }
 
   async findOne(userId: string): Promise<User> {
     const id = userId.toString()
-    const user = await this.userRepository.findOne({ where: { userId: id } });
+    const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`User #${userId} not found`);
     }
@@ -35,7 +38,7 @@ export class UsersService {
     updateUserInput: UpdateUserInput,
   ): Promise<User> {
     const user = await this.userRepository.preload({
-      userId: userId,
+      id: userId,
       ...updateUserInput,
     });
     if (!user) {

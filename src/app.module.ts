@@ -7,6 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { CompanyModule } from './company/company.module';
 
 @Module({
 
@@ -32,6 +33,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
           synchronize: true,
     }),
     UsersModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
